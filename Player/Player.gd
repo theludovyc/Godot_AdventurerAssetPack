@@ -2,8 +2,8 @@ extends KinematicBody2D
 
 const Gravity = 10
 const Max_Speed = 100
-const Accel = 0.25
-const Deccel = 0.7
+const Accel = 0.5
+const Deccel = 0.25
 
 var dir_x:int
 
@@ -42,8 +42,8 @@ func _physics_process(delta: float) -> void:
 		vel.y = Gravity
 	
 	if dir_x != 0:
-		vel.x = lerp(vel.x, sign(dir_x) * Max_Speed, 0.5)
+		vel.x = lerp(vel.x, sign(dir_x) * Max_Speed, Accel)
 	else:
-		vel.x = lerp(vel.x, 0, 0.1)
+		vel.x = lerp(vel.x, 0, Deccel)
 		
 	vel = move_and_slide(vel, Vector2.UP)
