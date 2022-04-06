@@ -49,6 +49,10 @@ cell_size = Vector2( 16, 16 )
 format = 1
 tile_data = PoolIntArray( 851985, 0, 0, 917517, 7, 0, 1179651, 5, 0, 1179666, 3, 0, 1179670, 4, 0, 1245213, 6, 0, 1310726, 2, 0, 1310737, 1, 0 )
 
+[node name="Player" parent="." instance=ExtResource( 8 )]
+position = Vector2( 264, 293 )
+z_index = 1
+
 [node name="Coins" type="Node" parent="."]
 
 [node name="Coin" parent="Coins" instance=ExtResource( 7 )]
@@ -62,6 +66,3 @@ position = Vector2( 585, 272 )
 
 [node name="Coin4" parent="Coins" instance=ExtResource( 7 )]
 position = Vector2( 632, 240 )
-
-[node name="Player" parent="." instance=ExtResource( 8 )]
-position = Vector2( 161, 189 )

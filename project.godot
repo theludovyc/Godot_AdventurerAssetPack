@@ -14,6 +14,10 @@ config/name="AdventurerAssetPack"
 run/main_scene="res://Levels/TestLevel.tscn"
 config/icon="res://icon.png"
 
+[debug]
+
+settings/fps/force_fps=13
+
 [display]
 
 window/size/width=640

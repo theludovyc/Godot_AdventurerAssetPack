@@ -1,11 +1,11 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://Player/Character.png" type="Texture" id=1]
 [ext_resource path="res://Player/Player.gd" type="Script" id=2]
 
 [sub_resource type="Animation" id=4]
 resource_name = "Fall"
-length = 0.5
+length = 0.3
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -14,7 +14,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.5 ),
+"times": PoolRealArray( 0, 0.3 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ 9, 12 ]
@@ -37,7 +37,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id=5]
 resource_name = "Jump"
-length = 0.5
+length = 0.3
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -45,7 +45,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.5 ),
+"times": PoolRealArray( 0, 0.3 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ 5, 9 ]
@@ -53,7 +53,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id=6]
 resource_name = "Land"
-length = 0.5
+length = 0.2
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -69,7 +69,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id=3]
 resource_name = "Move"
-length = 0.5
+length = 0.3
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -78,7 +78,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.5 ),
+"times": PoolRealArray( 0, 0.3 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ 1, 5 ]
@@ -138,27 +138,34 @@ advance_condition = "is_on_floor"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=21]
 switch_mode = 2
-auto_advance = true
+advance_condition = "is_not_moving"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=23]
+advance_condition = "is_jumping"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=24]
+switch_mode = 2
+advance_condition = "is_moving"
 
 [sub_resource type="AnimationNodeStateMachine" id=10]
 states/Fall/node = SubResource( 12 )
-states/Fall/position = Vector2( 499, 180 )
+states/Fall/position = Vector2( 495, 226 )
 states/Idle/node = SubResource( 7 )
 states/Idle/position = Vector2( 524, 52 )
 states/Jump/node = SubResource( 13 )
-states/Jump/position = Vector2( 723, 146 )
+states/Jump/position = Vector2( 723, 216 )
 states/Land/node = SubResource( 14 )
-states/Land/position = Vector2( 353, 102 )
+states/Land/position = Vector2( 373, 142 )
 states/Move/node = SubResource( 8 )
 states/Move/position = Vector2( 723, 52 )
-transitions = [ "Idle", "Move", SubResource( 9 ), "Move", "Idle", SubResource( 15 ), "Idle", "Jump", SubResource( 16 ), "Idle", "Fall", SubResource( 17 ), "Move", "Fall", SubResource( 18 ), "Jump", "Fall", SubResource( 19 ), "Fall", "Land", SubResource( 20 ), "Land", "Idle", SubResource( 21 ) ]
+transitions = [ "Idle", "Move", SubResource( 9 ), "Move", "Idle", SubResource( 15 ), "Idle", "Jump", SubResource( 16 ), "Idle", "Fall", SubResource( 17 ), "Move", "Fall", SubResource( 18 ), "Jump", "Fall", SubResource( 19 ), "Fall", "Land", SubResource( 20 ), "Land", "Idle", SubResource( 21 ), "Move", "Jump", SubResource( 23 ), "Land", "Move", SubResource( 24 ) ]
 start_node = "Idle"
 graph_offset = Vector2( -38, -63 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=11]
 
 [sub_resource type="RectangleShape2D" id=22]
-extents = Vector2( 10, 22.5 )
+extents = Vector2( 10, 22 )
 
 [node name="Player" type="KinematicBody2D"]
 script = ExtResource( 2 )
@@ -188,5 +195,5 @@ parameters/conditions/is_not_moving = false
 parameters/conditions/is_on_floor = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0, 3 )
+position = Vector2( 0, 2 )
 shape = SubResource( 22 )
