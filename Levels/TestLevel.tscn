@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Levels/Tileset/Autotile/Autotile.tres" type="TileSet" id=1]
 [ext_resource path="res://Levels/Parallax/Montains.png" type="Texture" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://Levels/Parallax/Clouds2.png" type="Texture" id=5]
 [ext_resource path="res://Levels/Tileset/Decor/Decor.tres" type="TileSet" id=6]
 [ext_resource path="res://Coin/Coin.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Player/Player.tscn" type="PackedScene" id=8]
 
 [node name="TestLevel" type="Node2D"]
 
@@ -61,3 +62,6 @@ position = Vector2( 585, 272 )
 
 [node name="Coin4" parent="Coins" instance=ExtResource( 7 )]
 position = Vector2( 632, 240 )
+
+[node name="Player" parent="." instance=ExtResource( 8 )]
+position = Vector2( 161, 189 )
