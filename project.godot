@@ -98,6 +98,10 @@ window/size/test_height=760
 window/stretch/mode="viewport"
 window/stretch/aspect="keep"
 
+[editor_plugins]
+
+enabled=PoolStringArray( "res://addons/StateGraph/plugin.cfg" )
+
 [importer_defaults]
 
 texture={
