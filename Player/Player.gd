@@ -1,16 +1,16 @@
 extends KinematicBody2D
 
-const Gravity = 9.81
+const Gravity = 14
 const Max_Speed = 320
 const Accel = 0.5
 const Deccel = 0.3
-const Jump_Acc = Gravity * 35
+const Jump_Acc = Gravity * 30
 
-var dir_x:int
+var dir_x : int
 
-var velocity:Vector2
+var velocity : Vector2
 
-var want_jump:bool
+var want_jump : bool
 
 var default_state = "Idle"
 
