@@ -1,13 +1,10 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Player/player_spriteframes.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://Player/Player.gd" type="Script" id=2]
-[ext_resource path="res://Player/Fall.gd" type="Script" id=3]
-[ext_resource path="res://BabaGodotLib/StateMachine/StateMachine.gd" type="Script" id=4]
-[ext_resource path="res://BabaGodotLib/StateMachine/StateAnimationHandler.gd" type="Script" id=5]
-[ext_resource path="res://Player/Run.gd" type="Script" id=6]
-[ext_resource path="res://Player/Idle.gd" type="Script" id=7]
-[ext_resource path="res://Player/Jump.gd" type="Script" id=8]
+[ext_resource path="res://addons/StateGraph/StateMachine/State.gd" type="Script" id=3]
+[ext_resource path="res://addons/StateGraph/StateMachine/StateMachine.gd" type="Script" id=4]
+[ext_resource path="res://addons/StateGraph/StateMachine/StateAnimationHandler/StateAnimationHandler.gd" type="Script" id=5]
 
 [sub_resource type="RectangleShape2D" id=22]
 extents = Vector2( 10, 22 )
@@ -26,19 +23,28 @@ shape = SubResource( 22 )
 
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource( 4 )
+standalone_trigger = {
+}
 
 [node name="Fall" type="Node" parent="StateMachine"]
 script = ExtResource( 3 )
+standalone_trigger = {
+}
 
 [node name="Idle" type="Node" parent="StateMachine"]
-script = ExtResource( 7 )
+script = ExtResource( 3 )
+standalone_trigger = {
+}
 
 [node name="Jump" type="Node" parent="StateMachine"]
-script = ExtResource( 8 )
+script = ExtResource( 3 )
+standalone_trigger = {
+}
 
 [node name="Run" type="Node" parent="StateMachine"]
-script = ExtResource( 6 )
+script = ExtResource( 3 )
+standalone_trigger = {
+}
 
 [node name="StateAnimationHandler" type="Node" parent="StateMachine"]
 script = ExtResource( 5 )
-animated_sprite_path = NodePath("../../AnimatedSprite")
