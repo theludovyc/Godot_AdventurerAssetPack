@@ -8,6 +8,28 @@
 
 config_version=4
 
+_global_script_classes=[ {
+"base": "Node",
+"class": "State",
+"language": "GDScript",
+"path": "res://BabaGodotLib/StateMachine/State.gd"
+}, {
+"base": "Node",
+"class": "StateAnimationHandler",
+"language": "GDScript",
+"path": "res://BabaGodotLib/StateMachine/StateAnimationHandler.gd"
+}, {
+"base": "State",
+"class": "StateMachine",
+"language": "GDScript",
+"path": "res://BabaGodotLib/StateMachine/StateMachine.gd"
+} ]
+_global_script_class_icons={
+"State": "",
+"StateAnimationHandler": "",
+"StateMachine": ""
+}
+
 [application]
 
 config/name="AdventurerAssetPack"
@@ -16,7 +38,7 @@ config/icon="res://icon.png"
 
 [debug]
 
-settings/fps/force_fps=13
+settings/fps/force_fps=60
 
 [display]
 
