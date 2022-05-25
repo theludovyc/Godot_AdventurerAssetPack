@@ -1,10 +1,10 @@
 extends KinematicBody2D
 
 const Gravity = 9.81
-const Max_Speed = 200
+const Max_Speed = 320
 const Accel = 0.5
 const Deccel = 0.3
-const Jump_Acc = Gravity * 30
+const Jump_Acc = Gravity * 35
 
 var dir_x:int
 
