@@ -1,13 +1,11 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Player/player_spriteframes.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://Player/Player.gd" type="Script" id=2]
-[ext_resource path="res://Player/Fall.gd" type="Script" id=3]
-[ext_resource path="res://BabaGodotLib/StateMachine/StateMachine.gd" type="Script" id=4]
-[ext_resource path="res://BabaGodotLib/StateMachine/StateAnimationHandler.gd" type="Script" id=5]
-[ext_resource path="res://Player/Run.gd" type="Script" id=6]
-[ext_resource path="res://Player/Idle.gd" type="Script" id=7]
-[ext_resource path="res://Player/Jump.gd" type="Script" id=8]
+[ext_resource path="res://addons/StateGraph/StateMachine/State.gd" type="Script" id=3]
+[ext_resource path="res://addons/StateGraph/StateMachine/StateMachine.gd" type="Script" id=4]
+[ext_resource path="res://addons/StateGraph/StateMachine/StateAnimationHandler/StateAnimationHandler.gd" type="Script" id=5]
+[ext_resource path="res://addons/StateGraph/StateMachine/StateLabel.gd" type="Script" id=6]
 
 [sub_resource type="RectangleShape2D" id=22]
 extents = Vector2( 10, 22 )
@@ -24,21 +22,84 @@ playing = true
 position = Vector2( 0, 2 )
 shape = SubResource( 22 )
 
-[node name="StateMachine" type="Node" parent="."]
+[node name="StateMachine" type="Node2D" parent="."]
 script = ExtResource( 4 )
+standalone_trigger = {
+}
+
+[node name="Idle" type="Node" parent="StateMachine"]
+script = ExtResource( 3 )
+connexions_array = [ {
+"events": [ {
+"conditions": [ {
+"condition": "abs(velocity.x) > MIN_MOVE_VEL",
+"target_path": NodePath("../.."),
+"type": "condition"
+} ],
+"emitter_path": "../..",
+"trigger": "process",
+"type": "event"
+} ],
+"to": "StateMachine/Run",
+"type": "connexion"
+} ]
+standalone_trigger = {
+}
+graph_position = Vector2( 0.619768, 0.354965 )
 
 [node name="Fall" type="Node" parent="StateMachine"]
 script = ExtResource( 3 )
-
-[node name="Idle" type="Node" parent="StateMachine"]
-script = ExtResource( 7 )
+connexions_array = [ {
+"events": [ {
+"conditions": [ {
+"condition": "is_on_floor()",
+"target_path": NodePath("../.."),
+"type": "condition"
+} ],
+"emitter_path": "../..",
+"trigger": "process",
+"type": "event"
+} ],
+"to": "StateMachine/Idle",
+"type": "connexion"
+} ]
+standalone_trigger = {
+}
+graph_position = Vector2( 0.276656, 0.557291 )
 
 [node name="Jump" type="Node" parent="StateMachine"]
-script = ExtResource( 8 )
+script = ExtResource( 3 )
+standalone_trigger = {
+}
+graph_position = Vector2( 0.319507, 0.687208 )
 
 [node name="Run" type="Node" parent="StateMachine"]
-script = ExtResource( 6 )
+script = ExtResource( 3 )
+connexions_array = [ {
+"events": [ {
+"conditions": [ {
+"condition": "abs(velocity.x) < MIN_MOVE_VEL",
+"target_path": NodePath("../.."),
+"type": "condition"
+} ],
+"emitter_path": "../..",
+"trigger": "process",
+"type": "event"
+} ],
+"to": "StateMachine/Idle",
+"type": "connexion"
+} ]
+standalone_trigger = {
+}
+graph_position = Vector2( 0.29148, 0.271969 )
 
 [node name="StateAnimationHandler" type="Node" parent="StateMachine"]
 script = ExtResource( 5 )
 animated_sprite_path = NodePath("../../AnimatedSprite")
+
+[node name="StateLabel" type="Label" parent="StateMachine"]
+margin_left = -20.0
+margin_top = -47.0
+margin_right = 20.0
+margin_bottom = -33.0
+script = ExtResource( 6 )
